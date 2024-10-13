@@ -4,7 +4,10 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 # MongoDB connection
-
+connection_string = "mongodb+srv://thapasushilit:Vp3NxfMary7hE6Pt@cluster0.is8lh.mongodb.net/"
+client = MongoClient("your_mongodb_atlas_connection_string")
+db = client.shop_db
+products_collection = db.products
 
 @app.route('/')
 def home():
