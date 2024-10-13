@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="class">
+    <h1 class="display-4">Welcome to Your One-Stop Shop.</h1>
+    <p class="lead">Find incredible products at prices you'll love.</p>
+    <hr class="my-4">
+    <p>Discover a wide range of products and find the one that's right for you.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('products') }}" role="button">View Products</a>
+</div>
+{% endblock %}
