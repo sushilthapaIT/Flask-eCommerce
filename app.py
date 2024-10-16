@@ -3,11 +3,12 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-# MongoDB connection
-connection_string = "mongodb+srv://thapasushilit:Vp3NxfMary7hE6Pt@cluster0.is8lh.mongodb.net/"
-client = MongoClient("your_mongodb_atlas_connection_string")
-db = client.shop_db
-products_collection = db.products
+# Connect to MongoDB Atlas
+client = MongoClient("mongodb+srv://thapasushilit:Vp3NxfMary7hE6Pt@cluster0.is8lh.mongodb.net/")
+
+db = client.shop_db  # Connect to the 'shop_db' database
+products_collection = db.products  # Connect to the 'products' collection
+
 
 @app.route('/')
 def home():
@@ -15,8 +16,8 @@ def home():
 
 @app.route('/products')
 def products():
-    products = products_collection.find()
-    return render_template('products.html', products=products)
+    products_data = products_collection.find()  # Fetch all products
+    return render_template('products.html', products=products_data)
 
 if __name__ == '__main__':
     app.run(debug=True)

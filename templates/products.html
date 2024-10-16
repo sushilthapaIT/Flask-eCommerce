@@ -8,7 +8,7 @@
     {% for product in products %}
     <div class="col">
         <div class="card h-100">
-            <img src="{{ url_for('static', filename=product.image_path) }}" 
+            <img src="{{product.image_path }}" 
                  class="card-img-top product-image" 
                  alt="{{ product.name }}">
             <div class="card-body">
