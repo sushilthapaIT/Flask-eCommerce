@@ -9,7 +9,7 @@ load_dotenv()
 # Get MongoDB credentials from environment variables
 MONGODB_USERNAME = os.getenv('MONGODB_USERNAME')
 MONGODB_PASSWORD = os.getenv('MONGODB_PASSWORD')
-MONGODB_CLUSTER = os.getenv('MONGODB_CLUSTER')  
+MONGODB_CLUSTER = os.getenv('MONGODB_CLUSTER')
 
 # Connected to MongoDB Atlas using credentials from environment variables
 mongo_uri = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@{MONGODB_CLUSTER}/?retryWrites=true&w=majority"
@@ -18,6 +18,8 @@ client = MongoClient(mongo_uri)
 # Connected to the 'shop_db' database and 'products' collection
 db = client.shop_db
 products_collection = db.products
+
+print(db)
 
 app = Flask(__name__)
 
