@@ -1,0 +1,42 @@
+name: CI  # This is the name of the workflow, displayed in GitHub Actions UI
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow when code is pushed to the 'main' branch
+  pull_request:
+    # Trigger the workflow on pull request events (optional, based on your needs)
+    # This is useful for ensuring tests pass before merging PRs.
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # The job will run on the latest version of Ubuntu
+
+    steps:
+    # Step 1: Checkout the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v3  # This action checks out your repository's code to the GitHub runner
+
+    # Step 2: Set up the Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4  # This action sets up Python on the runner
+      with:
+        python-version: '3.9'  # Use Python 3.9 for this CI pipeline
+
+    # Step 3: Install project dependencies
+    - name: Install dependencies
+      run: |
+        # Upgrade pip to the latest version
+        python -m pip install --upgrade pip
+        # Install all required dependencies from the requirements.txt file
+        pip install -r requirements.txt
+
+    # Step 4: Run the tests
+    - name: Run Tests
+      env:
+        MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}  # MongoDB username stored as GitHub secret
+        MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}  # MongoDB password stored as GitHub secret
+        MONGODB_CLUSTER: ${{ secrets.MONGODB_CLUSTER }}  # MongoDB cluster address stored as GitHub secret
+      run: |
+        # Run the tests using pytest, which will execute the tests located in the 'tests' directory
+        pytest tests/
